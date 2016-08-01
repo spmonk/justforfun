@@ -1,0 +1,15 @@
+Gradle是有独立安装版本的，但使用AS进行android开发不需要单独安装Gradle。
+因为为了解决多个项目采用的Gradle版本和本地安装的版本不一致的问题，Google提出了gradle-wrapper的解决方案：
+在每个项目都配置了一个指定版本的 Gradle ，为每个 Android 项目本地都有一个小型的 Gradle ，通过
+这个每个项目可以支持用不同的 Gradle 版本来构建项目。
+
+wrapper.properties文件说明：声明了 gradle 的目录与下载路径以及当前项目使用的 gradle 版本
+
+AS 1.0 的时候要求必须使用 gradle 1.x 的版本，等到 AS 2.0 的时候，Google 不支持 gradle1.x 的版本，
+这个时候必须手动更新下 android gradle plugin 的版本，然后重新同步下。
+
+gradlew -v:即可以查看当前项目所用的 gradle 的版本，gradlew 即为 gradle wrapper 的缩写
+gradlew clean 清除/app目录下的build文件夹
+gradlew build 检查依赖并编译打包（把 debug、release 环境的包都打出来）
+gradlew assembleDebug 编译并打Debug包
+gradlew assembleRelease 编译并打Release的包

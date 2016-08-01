@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'//说明这是个app
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "com.example.testing.justforfun"
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+
+    //签名配置信息
+    signingConfigs {
+        release {
+            storeFile file('../config/release.keystore')
+            storePassword 'release'
+            keyAlias 'androidkey'
+            keyPassword 'android'
+        }
+    }
+
+    //编译类型，也可以声明其他类型，名字随意取，类型签名所用的配置不一样，这个配置具体详细也就是在上部分 signingConfigs 节点指定的
+    buildTypes {
+        debug {
+            applicationIdSuffix 'bugtest'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.1.0'
+}
