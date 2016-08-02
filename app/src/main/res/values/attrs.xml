@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NKPasswordEditText">
+        <!--中间的标题-->
+        <attr name="showIcon" format="reference"/>
+        <attr name="hideIcon" format="reference"/>
+    </declare-styleable>
+    
+</resources>
