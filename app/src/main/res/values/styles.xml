@@ -1,11 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"><!--MD的兼容主题-->
+        <!-- Customize your theme here.Color Palette(调色板)的属性 -->
+        <item name="colorPrimary">@color/colorPrimary</item><!--对应ActionBar的颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--对应状态栏的颜色。对于5.0以下的设备，目前colorPrimaryDark无法去个性化状态栏的颜色-->
+        <item name="colorAccent">@color/colorAccent</item><!--强调色，一般对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色-->
+        <!--<item name="android:navigationBarColor">底部的navagationBar的颜色</item>-->
+
     </style>
 
 </resources>
