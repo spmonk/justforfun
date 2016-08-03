@@ -1,1 +1,1 @@
-include ':app', ':library'
+include ':app', ':library',":extras:nikedialog",":extras:passwordedittext"
