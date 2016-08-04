@@ -70,15 +70,16 @@ public class DialogUtils {
 
     // Try to resolve the colorAttr attribute.
     public static ColorStateList resolveActionTextColorStateList(Context context, @AttrRes int colorAttr, ColorStateList fallback) {
-        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{colorAttr});
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{colorAttr});//获取使用主题下的colorAttr属性值
         try {
             final TypedValue value = a.peekValue(0);
             if (value == null) {
                 return fallback;
             }
+            //颜色常量的开始的Integer为#，结束值为TYPE_LAST_COLOR_INT(31),说明value是个颜色常量
             if (value.type >= TypedValue.TYPE_FIRST_COLOR_INT && value.type <= TypedValue.TYPE_LAST_COLOR_INT) {
                 return getActionTextStateList(context, value.data);
-            } else {
+            } else {//
                 final ColorStateList stateList = a.getColorStateList(0);
                 if (stateList != null) {
                     return stateList;
