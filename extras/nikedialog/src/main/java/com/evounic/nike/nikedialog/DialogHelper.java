@@ -50,5 +50,6 @@ public class DialogHelper {
         nkDialog.positiveButton.setText(builder.positiveText);
         nkDialog.negativeButton.setText(builder.negativeText);
 
+
     }
 }

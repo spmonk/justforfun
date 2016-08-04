@@ -1,6 +1,7 @@
 package com.evounic.nike.nikedialog;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
@@ -70,8 +71,8 @@ public class NKDialog extends NKDialogBase{
         protected CharSequence negativeText;
 
         //show color
-        protected int positiveColor;
-        protected int negativeColor;
+        protected ColorStateList positiveColor;
+        protected ColorStateList negativeColor;
 
 
         public Builder(Context context) {
