@@ -1,9 +1,11 @@
 package com.evounic.nike.nikedialog;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.UiThread;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -17,14 +19,31 @@ public class NKDialog extends NKDialogBase{
     protected final Builder mBuilder;
 
     //title
-    protected ImageView titleIcon;
     protected TextView title;
     protected View titleView;
 
+    //content
+    protected TextView content;
+    protected Button positiveButton;
+    protected Button negativeButton;
+
     //protected 不让外部直接调用进行初始化，但允许子类继承,通过Builder来调用生成相应实例
     protected NKDialog(Builder builder) {
-        super(builder.mContext,0);
+        super(builder.mContext);
         mBuilder = builder;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        installContent();
+    }
+
+    private void installContent() {
+        int layoutId = DialogHelper.selectContentView(mBuilder);
+        rootView = LayoutInflater.from(mBuilder.mContext).inflate(layoutId, null);
+        setContentView(rootView);
+        DialogHelper.setupView(this);
     }
 
     public Builder getBuilder() {
@@ -37,10 +56,23 @@ public class NKDialog extends NKDialogBase{
             super.show();
     }
 
+
+    /**
+     * NKDialog Builder
+     */
     public static class Builder {
         protected final Context mContext;
 
-        private CharSequence title;
+        //show text
+        protected CharSequence title;
+        protected CharSequence content;
+        protected CharSequence positiveText;
+        protected CharSequence negativeText;
+
+        //show color
+        protected int positiveColor;
+        protected int negativeColor;
+
 
         public Builder(Context context) {
             mContext = context;
@@ -53,6 +85,38 @@ public class NKDialog extends NKDialogBase{
 
         public Builder title(int resId){
             return title(mContext.getText(resId));
+        }
+
+        public Builder content(CharSequence content){
+            this.content = content;
+            return this;
+        }
+
+        public Builder content(int resId){
+            return content(mContext.getText(resId));
+        }
+
+        public Builder positiveText(CharSequence positiveText){
+            this.positiveText = positiveText;
+            return this;
+        }
+
+        public Builder positiveText(int resId){
+            return positiveText(mContext.getText(resId));
+        }
+
+        public Builder negativeText(CharSequence negativeText){
+            this.negativeText = negativeText;
+            return this;
+        }
+
+        public Builder negativeText(int resId){
+            return negativeText(mContext.getText(resId));
+        }
+
+        public Builder positiveColor(int color){
+            this.positiveColor = color;
+            return this;
         }
 
 

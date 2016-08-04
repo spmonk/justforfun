@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--common-->
+    <dimen name="dialog_paddingHorizontal">36dp</dimen>
+
+    <!--title-->
+    <dimen name="dialog_title_text_size">22sp</dimen>
+    <dimen name="dialog_title_frame_padding_top">54dp</dimen>
+
+    <!--content-->
+    <dimen name="dialog_content_padding_top">30dp</dimen>
+    <dimen name="dialog_content_text_size">16sp</dimen>
+
+    <!--action button-->
+    <dimen name="dialog_action_frame_padding_top">54dp</dimen>
+    <dimen name="dialog_action_button_height">60dp</dimen>
+    <dimen name="dialog_action_button_text_size">18dp</dimen>
+    <dimen name="dialog_action_button_min_width">204dp</dimen>
+    <dimen name="dialog_action_frame_padding_bottom">30dp</dimen>
+</resources>

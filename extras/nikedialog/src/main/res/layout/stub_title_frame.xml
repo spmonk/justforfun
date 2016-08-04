@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/titleFrame"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/dialog_paddingHorizontal"
+              android:paddingRight="@dimen/dialog_paddingHorizontal"
+              android:paddingTop="@dimen/dialog_title_frame_padding_top">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dialog_title_text_size"
+        android:gravity="center_horizontal"
+        tools:text="Title"/>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actionFrame"
+    android:paddingTop="@dimen/dialog_action_frame_padding_top"
+    android:paddingLeft="@dimen/dialog_paddingHorizontal"
+    android:paddingRight="@dimen/dialog_paddingHorizontal"
+    android:paddingBottom="@dimen/dialog_paddingHorizontal"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/buttonDefaultNegative"
+        style="@style/ActionButton.Text"
+        tools:text="Negative"/>
+
+    <Button
+        android:id="@+id/buttonDefaultPositive"
+        style="@style/ActionButton.Text"
+        tools:text="Positive"/>
+
+</LinearLayout>
