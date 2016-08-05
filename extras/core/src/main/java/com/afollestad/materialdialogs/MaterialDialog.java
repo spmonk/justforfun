@@ -275,11 +275,11 @@ public class MaterialDialog extends DialogBase implements
         } else {
             switch (which) {
                 default: {
-                    if (mBuilder.btnSelectorPositive != 0)
+                    if (mBuilder.btnSelectorPositive != 0)//设置了Action Button 的selector Id
                         return ResourcesCompat.getDrawable(mBuilder.context.getResources(), mBuilder.btnSelectorPositive, null);
-                    Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_positive_selector);
+                    Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_positive_selector);//没有设置Action Selector，获取默认的Selector，默认的Selector的Drawable Id作为属性设置在主题下
                     if (d != null) return d;
-                    d = DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_positive_selector);
+                    d = DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_positive_selector);//如果从builder的context没有办法解析到selector的drawable，那么直接从dialog运行的context获取
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                         RippleHelper.applyColor(d, mBuilder.buttonRippleColor);
                     return d;

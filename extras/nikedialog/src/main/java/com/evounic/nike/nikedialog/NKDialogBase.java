@@ -13,7 +13,7 @@ public class NKDialogBase extends Dialog{
     protected View rootView;
 
     public NKDialogBase(Context context) {
-        this(context,R.style.NKCustomDialog);
+        super(context);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class NKDialogBase extends Dialog{
     }
 
     public NKDialogBase(Context context, int themeResId) {
-        super(context, R.style.NKCustomDialog);
+        super(context, themeResId);
     }
 
     protected NKDialogBase(Context context, boolean cancelable, OnCancelListener cancelListener) {

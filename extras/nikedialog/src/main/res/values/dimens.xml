@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--common-->
+    <dimen name="dialog_base_width">500dp</dimen>
     <dimen name="dialog_paddingHorizontal">36dp</dimen>
 
     <!--title-->
@@ -17,4 +18,5 @@
     <dimen name="dialog_action_button_text_size">18dp</dimen>
     <dimen name="dialog_action_button_min_width">204dp</dimen>
     <dimen name="dialog_action_frame_padding_bottom">30dp</dimen>
+    <dimen name="dialog_action_button_radius">10dp</dimen>
 </resources>
