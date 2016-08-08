@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="NKPasswordEditText">
-        <!--中间的标题-->
+        <!--&lt;!&ndash;label&ndash;&gt;
+        <attr name="labelIcon" format="reference"/>
+        <attr name="labelIconSize" format="dimension"/>
+        <attr name="labelIconSpace" format="dimension"/>-->
+
+        <!--right icon-->
+        <attr name="passwordIconSize" format="dimension"/>
         <attr name="showIcon" format="reference"/>
         <attr name="hideIcon" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="NKEditText">
+        <attr name="label" format="string"/>
+        <attr name="labelSize" format="dimension"/>
+        <attr name="labelColor" format="color|reference"/>
+        <attr name="labelSpace" format="dimension"/>
+
+        <attr name="labelPosition" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+
+        <attr name="labelIcon" format="reference"/>
+        <attr name="labelIconSize" format="dimension"/>
+
+        <attr name="deleteIcon" format="reference"/>
+        <attr name="deleteIconSize" format="dimension"/>
+        <attr name="deleteIconSpace" format="dimension"/>
+
+        <attr name="passwordIconSize" format="dimension"/>
+        <attr name="showIcon" format="reference"/>
+        <attr name="hideIcon" format="reference"/>
+
+        <attr name="editTextWidth" format="dimension"/>
+        <attr name="editTextHeight" format="dimension"/>
     </declare-styleable>
     
 </resources>

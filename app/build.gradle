@@ -41,4 +41,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.1.0'
     compile project(':extras:nikedialog')
     compile project(':extras:core')
+    compile project(':extras:passwordedittext')
 }
