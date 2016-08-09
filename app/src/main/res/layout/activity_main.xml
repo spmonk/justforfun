@@ -23,9 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <com.evounit.nike.passwordedittext.NKPasswordEditText
-        app:hideIcon="@drawable/wifi_eye"
-        app:showIcon="@drawable/wifi_eye_kejian"
-        app:passwordIconSize="24dp"
+        android:hint="用户名"
+        app:labelIcon="@drawable/bangding_zhanghao"
+        app:deleteIcon="@drawable/wifi_eye"
+        app:labelIconSpace="10dp"
+        app:actionIconSize="24dp"
         android:layout_width="500dp"
         android:layout_height="76dp" />
     <Button

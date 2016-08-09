@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="NKPasswordEditText">
-        <!--&lt;!&ndash;label&ndash;&gt;
+        <!--label-->
         <attr name="labelIcon" format="reference"/>
         <attr name="labelIconSize" format="dimension"/>
-        <attr name="labelIconSpace" format="dimension"/>-->
+        <attr name="labelIconSpace" format="dimension"/>
 
         <!--right icon-->
-        <attr name="passwordIconSize" format="dimension"/>
+        <attr name="actionIconSize" format="dimension"/>
         <attr name="showIcon" format="reference"/>
         <attr name="hideIcon" format="reference"/>
+        <attr name="deleteIcon" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="NKEditText">
+    <!--<declare-styleable name="NKEditText">
         <attr name="label" format="string"/>
         <attr name="labelSize" format="dimension"/>
         <attr name="labelColor" format="color|reference"/>
@@ -36,6 +37,6 @@
 
         <attr name="editTextWidth" format="dimension"/>
         <attr name="editTextHeight" format="dimension"/>
-    </declare-styleable>
+    </declare-styleable>-->
     
 </resources>

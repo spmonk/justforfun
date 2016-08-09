@@ -18,14 +18,18 @@ public class NKPasswordEditText extends EditText {
 
     private Drawable showIcon;
     private Drawable hideIcon;
-    /*private Drawable labelIcon;
-    private int labelIconSpace;*/
+    private Drawable labelIcon;
+    private Drawable labelIconFocused;
+    private Drawable deleteIcon;
+    private int labelIconSpace;
 
     private int colorAccent;//当前主题的colorAccent
-    //private int labelIconSize;
-    private int passwordIconSize;
+    private int labelIconSize;
+    private int actionIconSize;
 
     private Drawable currentIcon;//当前的显示的图标
+
+    private boolean isDeleteMode = false;
 
     public NKPasswordEditText(Context context) {
         this(context,null);
@@ -46,11 +50,12 @@ public class NKPasswordEditText extends EditText {
 
         showIcon = typedArray.getDrawable(R.styleable.NKPasswordEditText_showIcon);
         hideIcon = typedArray.getDrawable(R.styleable.NKPasswordEditText_hideIcon);
-        passwordIconSize = (int) typedArray.getDimension(R.styleable.NKPasswordEditText_passwordIconSize,getTextSize());
+        deleteIcon = typedArray.getDrawable(R.styleable.NKPasswordEditText_deleteIcon);
+        actionIconSize = (int) typedArray.getDimension(R.styleable.NKPasswordEditText_actionIconSize,getTextSize());
 
-        /*labelIcon = typedArray.getDrawable(R.styleable.NKPasswordEditText_labelIcon);
+        labelIcon = typedArray.getDrawable(R.styleable.NKPasswordEditText_labelIcon);
         labelIconSpace = (int) typedArray.getDimension(R.styleable.NKPasswordEditText_labelIconSpace,0f);
-        labelIconSize = (int) typedArray.getDimension(R.styleable.NKPasswordEditText_labelIconSize,getTextSize());*/
+        labelIconSize = (int) typedArray.getDimension(R.styleable.NKPasswordEditText_labelIconSize,getTextSize());
 
         typedArray = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorAccent});
         colorAccent = typedArray.getColor(0,0xFF00FF);
@@ -59,6 +64,10 @@ public class NKPasswordEditText extends EditText {
         if ((showIcon == null && hideIcon != null)||(showIcon != null && hideIcon == null)) {
             currentIcon = null;
             throw new IllegalArgumentException("需要同时设置显示图标和隐藏图标");
+        }
+        if ((deleteIcon != null)&&(showIcon !=null || hideIcon != null)) {
+            currentIcon = null;
+            throw new IllegalArgumentException("只能设置一种模式");
         }
 
         /*//默认图标
@@ -69,16 +78,22 @@ public class NKPasswordEditText extends EditText {
             hideIcon = getResources().getDrawable(R.drawable.wifi_eye);
         }*/
         if (showIcon != null && hideIcon != null) {
-            showIcon.setBounds(0, 0, passwordIconSize, passwordIconSize);
-            hideIcon.setBounds(0, 0, passwordIconSize, passwordIconSize);
+            showIcon.setBounds(0, 0, actionIconSize, actionIconSize);
+            hideIcon.setBounds(0, 0, actionIconSize, actionIconSize);
             currentIcon = hideIcon;
             setInputType(EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
         }
-        /*if (labelIcon != null) {
+        if (labelIcon != null) {
             labelIcon.setBounds(0, 0, labelIconSize, labelIconSize);
             setCompoundDrawables(labelIcon,null,null,null);
             setCompoundDrawablePadding(labelIconSpace);
-        }*/
+        }
+
+        if (deleteIcon != null) {
+            isDeleteMode = true;
+            deleteIcon.setBounds(0, 0, actionIconSize, actionIconSize);
+            currentIcon = deleteIcon;
+        }
         //DrawableCompat.setTint(showIcon,colorAccent);
         //DrawableCompat.setTint(hideIcon,colorAccent);
     }
@@ -88,9 +103,13 @@ public class NKPasswordEditText extends EditText {
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
        if (text.length() >0) {
-            setCompoundDrawables(null,null,currentIcon,null);
+            setCompoundDrawables(labelIcon,null,currentIcon,null);
         }else {
-            setCompoundDrawables(null,null,null,null);
+            setCompoundDrawables(labelIcon,null,null,null);
+           if (isDeleteMode) {
+               currentIcon = deleteIcon;
+               return;
+           }
             currentIcon = hideIcon;//恢复初始状态
         }
     }
@@ -109,10 +128,18 @@ public class NKPasswordEditText extends EditText {
             int space = (getHeight() - height)/2;
             boolean isInHeight = ( y > space && y < (space + height));
             if (isInHeight&&isInWidth) {
-                toggleIcon();
+                if (isDeleteMode) {
+                    clearText();
+                }else {
+                    toggleIcon();
+                }
             }
         }
         return super.onTouchEvent(event);
+    }
+
+    private void clearText() {
+        this.setText("");
     }
 
     private void toggleIcon() {
@@ -123,7 +150,7 @@ public class NKPasswordEditText extends EditText {
             currentIcon = hideIcon;
             setPasswordVisiable(false);
         }
-        setCompoundDrawables(null,null,currentIcon,null);
+        setCompoundDrawables(labelIcon,null,currentIcon,null);
     }
 
     private void setPasswordVisiable(boolean visiable){
@@ -139,4 +166,11 @@ public class NKPasswordEditText extends EditText {
         super.onDraw(canvas);
     }
 
+    @Override
+    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
+        super.onFocusChanged(focused, direction, previouslyFocusedRect);
+        if (focused) {
+            setCompoundDrawables(labelIcon,null,currentIcon,null);
+        }
+    }
 }
