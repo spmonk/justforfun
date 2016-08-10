@@ -73,7 +73,6 @@ class DialogInit {
         final MaterialDialog.Builder builder = dialog.mBuilder;
 
         // Set cancelable flag and dialog background color
-        // 设置dialog的window属性（背景）和是否可以取消，也可以在Dialog的构造函数中将设置好的window style传入
         dialog.setCancelable(builder.cancelable);
         dialog.setCanceledOnTouchOutside(builder.canceledOnTouchOutside);
         if (builder.backgroundColor == 0)
@@ -87,7 +86,7 @@ class DialogInit {
         }
 
         // Retrieve color theme attributes
-        if (!builder.positiveColorSet)//如果没有设置颜色集，解析本地的颜色属性
+        if (!builder.positiveColorSet)
             builder.positiveColor = DialogUtils.resolveActionTextColorStateList(builder.context, R.attr.md_positive_color, builder.positiveColor);
         if (!builder.neutralColorSet)
             builder.neutralColor = DialogUtils.resolveActionTextColorStateList(builder.context, R.attr.md_neutral_color, builder.neutralColor);

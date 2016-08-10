@@ -61,4 +61,13 @@ class DialogBase extends Dialog implements DialogInterface.OnShowListener {
     public void setContentView(View view, ViewGroup.LayoutParams params) throws IllegalAccessError {
         throw new IllegalAccessError("setContentView() is not supported in MaterialDialog. Specify a custom view in the Builder instead.");
     }
+
+    @Override
+    public void show() {
+        super.show();
+        /*WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.width = 500;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        getWindow().setAttributes(layoutParams);*/
+    }
 }

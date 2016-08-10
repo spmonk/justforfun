@@ -46,6 +46,7 @@ import com.afollestad.materialdialogs.internal.MDRootLayout;
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.afollestad.materialdialogs.internal.ThemeSingleton;
 import com.afollestad.materialdialogs.util.DialogUtils;
+import com.afollestad.materialdialogs.util.DimenHelper;
 import com.afollestad.materialdialogs.util.RippleHelper;
 import com.afollestad.materialdialogs.util.TypefaceHelper;
 
@@ -94,6 +95,12 @@ public class MaterialDialog extends DialogBase implements
         final LayoutInflater inflater = LayoutInflater.from(builder.context);
         view = (MDRootLayout) inflater.inflate(DialogInit.getInflateLayout(builder), null);
         DialogInit.init(this);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(getWindow().getAttributes());
+        float widthDimen = builder.context.getResources().getDimension(builder.dialogWidth == 0?R.dimen.md_default_dialog_width:builder.dialogWidth);
+        lp.width = DimenHelper.dp2px(builder.context,widthDimen);
+        getWindow().setAttributes(lp);
     }
 
     public final void setTypeface(TextView target, Typeface t) {
@@ -267,19 +274,31 @@ public class MaterialDialog extends DialogBase implements
 
     /* package */ Drawable getButtonSelector(DialogAction which, boolean isStacked) {
         if (isStacked) {
-            if (mBuilder.btnSelectorStacked != 0)
-                return ResourcesCompat.getDrawable(mBuilder.context.getResources(), mBuilder.btnSelectorStacked, null);
-            final Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_stacked_selector);
-            if (d != null) return d;
-            return DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_stacked_selector);
+            switch (which){
+                default:{
+                    if (mBuilder.btnSelectorStacked != 0)
+                        return ResourcesCompat.getDrawable(mBuilder.context.getResources(), mBuilder.btnSelectorStacked, null);
+                    final Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_stacked_positive_selector);
+                    if (d != null) return d;
+                    return DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_stacked_positive_selector);
+                }
+                case NEGATIVE: {
+                    if (mBuilder.btnSelectorStacked != 0)
+                        return ResourcesCompat.getDrawable(mBuilder.context.getResources(), mBuilder.btnSelectorStacked, null);
+                    final Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_stacked_negative_selector);
+                    if (d != null) return d;
+                    return DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_stacked_negative_selector);
+                }
+            }
+
         } else {
             switch (which) {
                 default: {
-                    if (mBuilder.btnSelectorPositive != 0)//设置了Action Button 的selector Id
+                    if (mBuilder.btnSelectorPositive != 0)
                         return ResourcesCompat.getDrawable(mBuilder.context.getResources(), mBuilder.btnSelectorPositive, null);
-                    Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_positive_selector);//没有设置Action Selector，获取默认的Selector，默认的Selector的Drawable Id作为属性设置在主题下
+                    Drawable d = DialogUtils.resolveDrawable(mBuilder.context, R.attr.md_btn_positive_selector);
                     if (d != null) return d;
-                    d = DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_positive_selector);//如果从builder的context没有办法解析到selector的drawable，那么直接从dialog运行的context获取
+                    d = DialogUtils.resolveDrawable(getContext(), R.attr.md_btn_positive_selector);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                         RippleHelper.applyColor(d, mBuilder.buttonRippleColor);
                     return d;
@@ -449,6 +468,7 @@ public class MaterialDialog extends DialogBase implements
         protected int inputMaxLength = -1;
         protected int inputRangeErrorColor = 0;
         protected int[] itemIds;
+        protected int dialogWidth;
 
         protected String progressNumberFormat;
         protected NumberFormat progressPercentFormat;
@@ -808,6 +828,11 @@ public class MaterialDialog extends DialogBase implements
 
         public Builder itemsIds(@ArrayRes int idsArrayRes) {
             return itemsIds(context.getResources().getIntArray(idsArrayRes));
+        }
+
+        public Builder dialogWidth(int dimenRes){
+            this.dialogWidth = dimenRes;
+            return this;
         }
 
         public Builder buttonsGravity(@NonNull GravityEnum gravity) {

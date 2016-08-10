@@ -95,9 +95,9 @@ public class MDRootLayout extends ViewGroup {
         a.recycle();
 
         mNoTitlePaddingFull = r.getDimensionPixelSize(R.dimen.md_notitle_vertical_padding);
-        mButtonPaddingFull = r.getDimensionPixelSize(R.dimen.md_button_frame_vertical_padding);
+        mButtonPaddingFull = r.getDimensionPixelSize(R.dimen.md_button_frame_vertical_padding);//action button的上下padding设置
 
-        mButtonHorizontalEdgeMargin = r.getDimensionPixelSize(R.dimen.md_button_padding_frame_side);
+        mButtonHorizontalEdgeMargin = r.getDimensionPixelSize(R.dimen.md_button_padding_frame_side);//acton button的左右padding设置
         mButtonBarHeight = r.getDimensionPixelSize(R.dimen.md_button_height);
 
         mDividerPaint = new Paint();
@@ -129,6 +129,12 @@ public class MDRootLayout extends ViewGroup {
         }
     }
 
+
+    /**
+     * 通过计算直接的child view的测量值和模式，来设置自己的宽高
+     * @param widthMeasureSpec 测量规格，包含测量要求和尺寸的信息
+     * @param heightMeasureSpec
+     */
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
@@ -137,6 +143,7 @@ public class MDRootLayout extends ViewGroup {
         mUseFullPadding = true;
         boolean hasButtons = false;
 
+        //通过计算判断是否是堆叠模式
         final boolean stacked;
         if (mStackBehavior == StackingBehavior.ALWAYS) {
             stacked = true;
@@ -159,6 +166,7 @@ public class MDRootLayout extends ViewGroup {
             stacked = buttonsWidth > buttonFrameWidth;
         }
 
+        //如果是堆叠模式，计算总的堆叠高度
         int stackedHeight = 0;
         mIsStacked = stacked;
         if (stacked) {
@@ -217,6 +225,7 @@ public class MDRootLayout extends ViewGroup {
 
         }
 
+        //将parent计算得到的width和width设置生效
         setMeasuredDimension(width, height - availableHeight);
     }
 
@@ -244,6 +253,15 @@ public class MDRootLayout extends ViewGroup {
         }
     }
 
+
+    /**
+     * 对所有的直接child进行定位，计算每个child的坐标ChildLeft,ChildTop
+     * @param changed
+     * @param l
+     * @param t
+     * @param r
+     * @param b
+     */
     @Override
     protected void onLayout(boolean changed, final int l, int t, final int r, int b) {
         if (isVisible(mTitleBar)) {
@@ -261,7 +279,7 @@ public class MDRootLayout extends ViewGroup {
             b -= mButtonPaddingFull;
             for (MDButton mButton : mButtons) {
                 if (isVisible(mButton)) {
-                    mButton.layout(l, b - mButton.getMeasuredHeight(), r, b);
+                    mButton.layout(l+mButtonHorizontalEdgeMargin, b - mButton.getMeasuredHeight(), r-mButtonHorizontalEdgeMargin, b);
                     b -= mButton.getMeasuredHeight();
                 }
             }
