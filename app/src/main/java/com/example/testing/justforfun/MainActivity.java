@@ -5,9 +5,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.afollestad.materialdialogs.GravityEnum;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.StackingBehavior;
 import com.evounic.nike.nikedialog.NKDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDialogClick(View view) {
-        new MaterialDialog.Builder(this).title("Dialog Test").content("this is a message for test").positiveText("确定").btnStackedGravity(GravityEnum.CENTER)
-                .stackingBehavior(StackingBehavior.ALWAYS).build().show();
     }
 
     public void onToggleEnable(View view) {
