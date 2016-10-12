@@ -1,1 +1,2 @@
-1. settings.gradle :全局的项目配置文件，里面主要声明一些需要加入 gradle 的 module
+1. settings.gradle :全局的项目配置文件，里面主要声明一些需要加入 gradle 的 module。
+                    主要是用来告诉Gralde build APP的时候需要包括那些module.
